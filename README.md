@@ -4,7 +4,7 @@ The following are a collection of Bash designed to use healthchecks.io as a ligh
 
 ## What is healthchecks.io
 
-As described in [their documentation|https://healthchecks.io/docs/], Healthchecks.io is a service for monitoring cron jobs and similar periodic processes. It works as a dead man's switch for processes that need to run continuously or on a regular, known schedule. 
+As described in [their documentation](https://healthchecks.io/docs/), Healthchecks.io is a service for monitoring cron jobs and similar periodic processes. It works as a dead man's switch for processes that need to run continuously or on a regular, known schedule. 
 
 It's easy to use, they have numerous integration and they offer a free account for anyone to start.
 
@@ -22,12 +22,14 @@ The idea was to make these as simple as possible to minimize dependencies. The o
 
 ## How do I setup a monitor?
 
-1. You should signup for a free account on [healthchecks.io|https://healthchecks.io/docs/] if you don't have one already.
+1. You should signup for a free account on [healthchecks.io](https://healthchecks.io/docs/) if you don't have one already.
 2. Create a check. The documentation can be found at : https://healthchecks.io/docs/configuring_checks/
 3. Clone this repository.
-4. Configure a check as a cron job. For example, I have the following line in my main servers crontab.
+4. Configure a check as a cron job. For example, I have the following line in my main servers crontab to monitor the server is online.
 
-  */5 * * * *  root  /srv/healthchecks/check_online.sh 00000000-0000-0000-0000-000000000000
+```
+*/5 * * * *  root  /srv/healthchecks/check_online.sh 00000000-0000-0000-0000-000000000000
+```
 
 ## Do these work with other dead man's switch system?
 
