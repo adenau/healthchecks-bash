@@ -4,7 +4,7 @@ The following are a collection of Bash designed to use healthchecks.io as a ligh
 
 ## What is healthchecks.io
 
-As described in [their documentation](https://healthchecks.io/docs/), Healthchecks.io is a service for monitoring cron jobs and similar periodic processes. It works as a dead man's switch for processes that need to run continuously or on a regular, known schedule. 
+As described in [their documentation](https://healthchecks.io/docs/), Healthchecks.io is a service for monitoring cron jobs and similar periodic processes. It works as a [dead man's switch](https://en.wikipedia.org/wiki/Dead_man%27s_switch) for processes that need to run continuously or on a regular, known schedule. 
 
 It's easy to use, they have numerous integration and they offer a free account for anyone to start.
 
