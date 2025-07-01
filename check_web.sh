@@ -1,15 +1,9 @@
 #!/bin/bash
 
 # ----------------------------------------------------------------------------------
-# Script for checking the status of Puppet
 #
-# Original script : 
-# ----------------------------------------------------------------------------------
-
-# ----------------------------------------------------------------------------------
-#
-# Script for checking the temperature reported by the ambient temperature sensor of. 
-# a poweredge server is too high. The results is sent back to https://healthchecks.io/
+# Script to check if there is enough free space. The results is sent back to
+# https://healthchecks.io/
 #
 # Copyright (c) 2022 Alexandre Denault
 #
@@ -34,11 +28,26 @@
 # SOFTWARE.
 #
 # Usage :
-#  > check_ssl.sh [host] [port] [health_check_key]
+
+#  > check_web.sh [host] [health_check_key]
 #
 # Example : 
-#  > check_ssl.sh www.technodabbler.com 443 00000000-0000-0000-0000-000000000000
-# 
+#  > check_web.sh www.technodabbler.com 00000000-0000-0000-0000-000000000000
 # ----------------------------------------------------------------------------------
 
-# Need to rebuild this
+
+URL=$1         # The HTTPS URL to check
+HCHK_ID=$2     # The hchk.io check ID
+
+# Use curl to get the HTTP status code
+HTTP_CODE=$(curl -o /dev/null -s -w "%{http_code}" "$URL")
+
+# Determine success or failure
+if [[ "$HTTP_CODE" == "200" ]]; then
+    RETCODE=""
+else
+    RETCODE="/fail"
+fi
+
+# Report to hchk.io
+curl -fsS --retry 3 -X POST -H "Content-Type: application/json" -d "{\"http_status\":$HTTP_CODE}" "https://hchk.io/$HCHK_ID$RETCODE" >/dev/null 2>&1
